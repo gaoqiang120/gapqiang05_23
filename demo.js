@@ -82,6 +82,49 @@ function BinaryTree(){
 	    return minNode(this.root)
 	}
 	
+	var findMinNode=function(node){ //如果存在左右两个节点的话查找右节点的最小节点
+    if(node){
+        while(node&&node.left!=null){
+            node=node.left
+        }
+        return node;
+    }
+    return null
+}
+	
+	var removeNode=function(node,key){
+	    if(node==null){ 
+		return null;
+	    }
+	    if(node.key>key){// 递归查找左叶子节点，直接等于返回的null值
+		node.left=removeNode(node.left,key) 
+		return node;
+	    }else if(node.key<key){// 递归查找右叶子节点，直接等于返回的null值
+		node.right=removeNode(mode.right,key)
+		return node;
+	    }else{// 如果查找到相等的情况下
+		if(node.left==null&&node.right==null){// 当只有一个节点，而且被选中
+		    node=null;
+		    return node;
+		}
+		if(node.left==null){ //左节点为空
+		    node=node.right;
+		    return node;
+		}else if(node.right==null){//右节点为空
+		    node=node.left;
+		    return node;
+		}
+
+		var aux=findMinNode(node.right);//查找到右节点最小节点赋值
+		node.key=aux.key;
+		node.right=removeNode(node.right,aux.key);
+		return node;
+	    }
+	}
+	this.remove=function(key){
+	    return removeNode(this.root,key)
+	}
+	
 }
 
 // 创建二叉树实例
