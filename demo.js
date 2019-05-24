@@ -146,7 +146,8 @@ function BinaryTree() {
         return 1+getNodeCount(node.left)+getNodeCount(node.right)
     }
    this.nodeCount=getNodeCount(this.root)
-    
+   
+   // 获取二叉树叶子节点个数
     var getNodeLeafCount=node=>{
         if(node===null){
           return 0
