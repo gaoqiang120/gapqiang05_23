@@ -137,7 +137,26 @@ function BinaryTree() {
     }
 
     this.maxDepth = () => maxDepth(this.root)
-
+    
+    // 获取二叉树所有节点个数
+    var getNodeCount=node=>{
+        if(node===null){
+          return 0
+        }
+        return 1+getNodeCount(node.left)+getNodeCount(node.right)
+    }
+   this.nodeCount=getNodeCount(this.root)
+    
+    var getNodeLeafCount=node=>{
+        if(node===null){
+          return 0
+        }
+		else if(node.left===null&&node.right===null){
+          return 1
+        }
+        return getNodeLeafCount(node.left)+getNodeLeafCount(node.right)
+    }    
+    this.nodeLeafCount=getNodeLeafCount(this.root)
 }
 
 // 创建二叉树实例
